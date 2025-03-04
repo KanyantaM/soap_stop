@@ -38,7 +38,7 @@ class OrderHistoryScreen extends StatelessWidget {
 
     return Scaffold(
       body: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         itemCount: orders.length,
         itemBuilder: (context, index) {
           return OrderCard(order: orders[index]);
@@ -50,7 +50,6 @@ class OrderHistoryScreen extends StatelessWidget {
 
 class OrderCard extends StatelessWidget {
   final Order order;
-
   const OrderCard({super.key, required this.order});
 
   @override
@@ -62,28 +61,49 @@ class OrderCard extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          contentPadding: const EdgeInsets.all(16),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           leading: CircleAvatar(
-            backgroundColor: statusColor.withValues(alpha: 0.2),
-            child: Icon(_getStatusIcon(order.status), color: statusColor),
+            backgroundColor: statusColor.withValues(alpha: 0.1),
+            radius: 18, // Adjusted size for a compact look
+            child: Icon(_getStatusIcon(order.status),
+                color: statusColor, size: 20),
           ),
-          title: Text('Order #${order.id}',
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          title: Text(
+            'Order #${order.id}',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+          subtitle: Row(
             children: [
-              Text(order.date,
-                  style: const TextStyle(color: Colors.black54, fontSize: 14)),
-              const SizedBox(height: 6),
-              Text(order.status,
-                  style: TextStyle(
-                      color: statusColor, fontWeight: FontWeight.bold)),
+              Text(
+                order.date,
+                style: const TextStyle(color: Colors.black54, fontSize: 13),
+              ),
             ],
           ),
-          trailing: Text(
-            currencyFormatter.format(order.price),
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          trailing: Column(
+            children: [
+              Text(
+                currencyFormatter.format(order.price),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+              const SizedBox(width: 8), // Keeps spacing consistent
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: statusColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  order.status,
+                  style: TextStyle(
+                      color: statusColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
           ),
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -91,7 +111,7 @@ class OrderCard extends StatelessWidget {
             );
           },
         ),
-        Divider()
+        const Divider(height: 0, thickness: 0.5),
       ],
     );
   }
