@@ -65,7 +65,7 @@ class OrderCard extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           leading: CircleAvatar(
             backgroundColor: statusColor.withValues(alpha: 0.1),
-            radius: 18, // Adjusted size for a compact look
+            radius: 18,
             child: Icon(_getStatusIcon(order.status),
                 color: statusColor, size: 20),
           ),
@@ -73,22 +73,19 @@ class OrderCard extends StatelessWidget {
             'Order #${order.id}',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
-          subtitle: Row(
-            children: [
-              Text(
-                order.date,
-                style: const TextStyle(color: Colors.black54, fontSize: 13),
-              ),
-            ],
+          subtitle: Text(
+            order.date,
+            style: const TextStyle(color: Colors.grey, fontSize: 13),
           ),
           trailing: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 currencyFormatter.format(order.price),
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
-              const SizedBox(width: 8), // Keeps spacing consistent
+              const SizedBox(height: 4),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
@@ -98,9 +95,10 @@ class OrderCard extends StatelessWidget {
                 child: Text(
                   order.status,
                   style: TextStyle(
-                      color: statusColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                    color: statusColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -119,15 +117,15 @@ class OrderCard extends StatelessWidget {
   Color _getStatusColor(String status) {
     switch (status) {
       case 'Clothes Received':
-        return Colors.green;
+        return Colors.blueAccent;
       case 'Washing':
-        return Colors.blue;
+        return Colors.lightBlue;
       case 'Pending':
-        return Colors.orange;
+        return Colors.orangeAccent;
       case 'Clothes Returned':
-        return Colors.purple;
+        return Colors.teal;
       case 'Canceled':
-        return Colors.red;
+        return Colors.redAccent;
       default:
         return Colors.blueGrey;
     }

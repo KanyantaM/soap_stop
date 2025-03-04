@@ -6,7 +6,7 @@ enum OrderStatus {
   washing,
   drying,
   readyForDelivery,
-  outForCall
+  outForCall,
 }
 
 class OrderProgress {
@@ -25,7 +25,7 @@ class OrderProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> steps = [
       {
-        'title': 'Awaiting Box Arrival',
+        'title': 'Awaiting Box Delivery',
         'icon': 'assets/images/fast-delivery.png'
       },
       {'title': 'Boxes in Transit', 'icon': 'assets/images/delivery-truck.png'},
@@ -38,16 +38,18 @@ class OrderProgressScreen extends StatelessWidget {
     int currentStep = orderProgress.status.index;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order Progress'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               'Track your order in real-time',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             const SizedBox(height: 16),
             Expanded(
@@ -65,35 +67,34 @@ class OrderProgressScreen extends StatelessWidget {
                           Column(
                             children: [
                               Container(
-                                width: 40,
-                                height: 40,
+                                width: 48,
+                                height: 48,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: isCompleted
-                                      ? Colors.green
-                                      : isCurrent
-                                          ? Colors.orange
-                                          : Colors.grey[300],
+                                  border: Border.all(
+                                    color:
+                                        isCurrent ? Colors.blue : Colors.black,
+                                    width: 2,
+                                  ),
+                                  color: isCompleted || isCurrent
+                                      ? Colors.white
+                                      : Colors.grey[300],
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Image.asset(
                                     steps[index]['icon'],
-                                    color: isCompleted
-                                        ? Colors.white
-                                        : isCurrent
-                                            ? Colors.white
-                                            : Colors.black54,
+                                    color: isCompleted || isCurrent
+                                        ? null
+                                        : Colors.black,
                                   ),
                                 ),
                               ),
                               if (index != steps.length - 1)
                                 Container(
-                                  width: 3,
+                                  width: 2,
                                   height: 40,
-                                  color: isCompleted
-                                      ? Colors.green
-                                      : Colors.grey[300],
+                                  color: Colors.black,
                                 ),
                             ],
                           ),
@@ -101,12 +102,18 @@ class OrderProgressScreen extends StatelessWidget {
                           Expanded(
                             child: Card(
                               elevation: isCurrent ? 4 : 1,
-                              color:
-                                  isCompleted ? Colors.green[50] : Colors.white,
+                              color: Colors.white,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
+                                borderRadius: BorderRadius.circular(12),
+                                side: BorderSide(
+                                  color: isCurrent
+                                      ? Colors.blue
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                              ),
                               child: Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Text(
                                   steps[index]['title'],
                                   style: TextStyle(
@@ -114,11 +121,7 @@ class OrderProgressScreen extends StatelessWidget {
                                     fontWeight: isCurrent
                                         ? FontWeight.bold
                                         : FontWeight.normal,
-                                    color: isCompleted
-                                        ? Colors.green
-                                        : isCurrent
-                                            ? Colors.orange
-                                            : Colors.black54,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -126,6 +129,7 @@ class OrderProgressScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 16),
                     ],
                   );
                 },

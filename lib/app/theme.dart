@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 
 class SoapStopTheme {
   static final lightTheme = ThemeData(
-    primarySwatch: Colors.blue,
+    primaryColor: Colors.blue,
+    colorScheme: const ColorScheme.light(
+      primary: Colors.blue,
+      secondary: Colors.lightBlueAccent,
+      surface: Colors.white,
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onSurface: Colors.black87,
+    ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.blue,
       foregroundColor: Colors.white,
       elevation: 4,
+      titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.blueAccent,
@@ -25,20 +34,31 @@ class SoapStopTheme {
       labelStyle: TextStyle(color: Colors.black87),
     ),
     textTheme: const TextTheme(
-      titleLarge: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),
+      headlineSmall: TextStyle(
+          fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+      titleMedium: TextStyle(
+          fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87),
       bodyMedium: TextStyle(fontSize: 16, color: Colors.black87),
     ),
   );
 
   static final darkTheme = ThemeData(
-    primarySwatch: Colors.blueGrey,
+    primaryColor: Colors.blueGrey,
+    colorScheme: const ColorScheme.dark(
+      primary: Colors.blueGrey,
+      secondary: Colors.tealAccent,
+      surface: Colors.black,
+      onPrimary: Colors.white,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+    ),
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.blueGrey,
       foregroundColor: Colors.white,
       elevation: 4,
+      titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.blueGrey,
@@ -55,8 +75,10 @@ class SoapStopTheme {
       labelStyle: TextStyle(color: Colors.white),
     ),
     textTheme: const TextTheme(
-      titleLarge: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+      headlineSmall: TextStyle(
+          fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+      titleMedium: TextStyle(
+          fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
       bodyMedium: TextStyle(fontSize: 16, color: Colors.white),
     ),
   );
