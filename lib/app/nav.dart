@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soap_stop/screens/home_screen.dart';
 import 'package:soap_stop/screens/order_history_screen.dart';
+import 'package:soap_stop/screens/order_progress.dart';
 import 'package:soap_stop/screens/profile_screen.dart';
-import 'package:soap_stop/widgets/laoding_widget.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 class App extends StatefulWidget {
@@ -51,9 +51,11 @@ class _AppState extends State<App> {
         body: PageView(
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
-          children: const [
+          children: [
             HomeScreen(),
-            SoapStopLoadingWidget(),
+            OrderProgressScreen(
+                orderProgress:
+                    OrderProgress(orderId: "123", status: OrderStatus.drying)),
             OrderHistoryScreen(),
           ],
         ),
